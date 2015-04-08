@@ -1,0 +1,15 @@
+TLS Certificates
+
+CA
+==
+cacert.pem		/etc/pki/CA/cacert.pem 
+
+Server
+======
+serverkey.pem		/etc/pki/libvirt/private/serverkey.pem.
+servercert.pem		/etc/pki/libvirt/servercert.pem. 
+
+Client
+======
+clientkey.pem		/etc/pki/libvirt/private/clientkey.pem
+clientcert.pem		/etc/pki/libvirt/clientcert.pem
