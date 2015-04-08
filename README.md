@@ -8,8 +8,9 @@ make all
 
 Usage
 -----
-$ vmmon -help
+vmmon -help
 Usage: vmmon [options] [FILENAME]
+```
        FILENAME
 		File containing IP addresses or hostnames (one per line) of the nodes to be monitored.
 		If no file is specified, the localhost is monitored by default.
@@ -21,6 +22,6 @@ Usage: vmmon [options] [FILENAME]
 		-d Disk threshold percentage (default=20)
 		-i Monitor interval in secs (default=10)
 		-n Number of iterations (default=1)
-
+```
 e.g.
        vmmon -t 1 test-nodes-file
