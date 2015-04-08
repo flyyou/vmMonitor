@@ -25,4 +25,35 @@ Usage: vmmon [options] [FILENAME]
 		-n Number of iterations (default=1)
 ```
 e.g.
-       vmmon -t 1 test-nodes-file
+```
+vmmon -t 1 test-nodes-file
+server=127.0.0.1 vm-id=14 cpu-util=0%
+
+server=127.0.0.1 vm-id=16 cpu-util=0%
+
+server=127.0.0.1 vm-id=17 cpu-util=0%
+
+server=127.0.0.1 vm-id=18 cpu-util=0%
+
+server=127.0.0.1 vm-id=19 cpu-util=0%
+
+server=ansari-ThinkPad-T61 vm-id=14 cpu-util=0%
+
+server=ansari-ThinkPad-T61 vm-id=16 cpu-util=0%
+
+server=ansari-ThinkPad-T61 vm-id=17 cpu-util=0%
+
+server=ansari-ThinkPad-T61 vm-id=18 cpu-util=0%
+
+server=ansari-ThinkPad-T61 vm-id=19 cpu-util=0%
+
+server=localhost vm-id=14 cpu-util=0%
+
+server=localhost vm-id=16 cpu-util=0%
+
+server=localhost vm-id=17 cpu-util=0%
+
+server=localhost vm-id=18 cpu-util=0%
+
+server=localhost vm-id=19 cpu-util=0%
+````
