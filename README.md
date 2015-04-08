@@ -3,8 +3,10 @@ A C++ app to monitor VM utilization using libvirt
 
 Build
 -----
+'''
 make clean
 make all
+'''
 
 Usage
 -----
