@@ -85,7 +85,6 @@ usage:
     printf("Usage: vmmon [options] [FILENAME]\n"
            "       FILENAME\n"
            "\t\tFile containing IP addresses or hostnames (one per line) of the nodes to be monitored.\n"
-           "\t\tIf no file is specified, the localhost is monitored by default.\n"
            "       OPTIONS\n"
           "\t\t-t Run time in minutes. Specify either -t or -n.\n"
           "\t\t-x Number of processing threads (default=1)\t\t \n"
