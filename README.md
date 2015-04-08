@@ -8,9 +8,9 @@ make all
 
 Usage
 -----
+```
 vmmon -help
 Usage: vmmon [options] [FILENAME]
-```
        FILENAME
 		File containing IP addresses or hostnames (one per line) of the nodes to be monitored.
 		If no file is specified, the localhost is monitored by default.
