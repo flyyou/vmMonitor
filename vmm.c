@@ -64,10 +64,11 @@ int vmMonitor::init(int argc, char *argv[]) {
         }
     }
 
-    if (optind < argc) {
+    if (optind >= argc)
+        goto usage;
+
         nodeFileOpt = 1;
         strcpy(nodeFile, argv[optind]);
-    }
 
     if (!numIterationsOpt) {
         if (runTimeOpt) {
@@ -82,7 +83,7 @@ int vmMonitor::init(int argc, char *argv[]) {
     return 1;
 
 usage:
-    printf("Usage: vmmon [options] [FILENAME]\n"
+    printf("Usage: vmmon [options] FILENAME\n"
            "       FILENAME\n"
            "\t\tFile containing IP addresses or hostnames (one per line) of the nodes to be monitored.\n"
            "       OPTIONS\n"

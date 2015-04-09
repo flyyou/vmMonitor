@@ -4,7 +4,17 @@
 
 // VM Monitor : Libvirt driver
 
-int vmmGetDomains(virConnectPtr conn,  int **domID);
-unsigned long long vmmGetCPUTime(virDomainPtr dom);
+class vmmLibvirt {
+    virConnectPtr conn;
+public:
+    int *domId;
+    int numDomains;
+    vmmLibvirt(char *uri);
+    unsigned long long getDomainCpuTime(int index);
+    unsigned long long getNodeCpuTime();
+    int getDomainID(int **domID);
+    virDomainPtr domainLookupByID(int domID);
+};
+
 
 #endif
