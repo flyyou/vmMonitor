@@ -27,33 +27,19 @@ Usage: vmmon [options] [FILENAME]
 e.g.
 ```
 vmmon -t 1 test-nodes-file
-server=127.0.0.1 vm-id=14 cpu-util=0%
+server: 127.0.0.1                      vmid: 14   cpu_util: 0%
+server: 127.0.0.1                      vmid: 16   cpu_util: 0%
+server: 127.0.0.1                      vmid: 17   cpu_util: 0%
+server: 127.0.0.1                      vmid: 18   cpu_util: 0%
+server: 127.0.0.1                      vmid: 19   cpu_util: 0%
+server: ansari-ThinkPad-T61            vmid: 14   cpu_util: 0%
+server: ansari-ThinkPad-T61            vmid: 16   cpu_util: 0%
+server: ansari-ThinkPad-T61            vmid: 17   cpu_util: 0%
+server: ansari-ThinkPad-T61            vmid: 18   cpu_util: 0%
+server: ansari-ThinkPad-T61            vmid: 19   cpu_util: 0%
+server: localhost                      vmid: 14   cpu_util: 0%
+server: localhost                      vmid: 16   cpu_util: 0%
+server: localhost                      vmid: 17   cpu_util: 0%
+server: localhost                      vmid: 18   cpu_util: 0%
 
-server=127.0.0.1 vm-id=16 cpu-util=0%
-
-server=127.0.0.1 vm-id=17 cpu-util=0%
-
-server=127.0.0.1 vm-id=18 cpu-util=0%
-
-server=127.0.0.1 vm-id=19 cpu-util=0%
-
-server=ansari-ThinkPad-T61 vm-id=14 cpu-util=0%
-
-server=ansari-ThinkPad-T61 vm-id=16 cpu-util=0%
-
-server=ansari-ThinkPad-T61 vm-id=17 cpu-util=0%
-
-server=ansari-ThinkPad-T61 vm-id=18 cpu-util=0%
-
-server=ansari-ThinkPad-T61 vm-id=19 cpu-util=0%
-
-server=localhost vm-id=14 cpu-util=0%
-
-server=localhost vm-id=16 cpu-util=0%
-
-server=localhost vm-id=17 cpu-util=0%
-
-server=localhost vm-id=18 cpu-util=0%
-
-server=localhost vm-id=19 cpu-util=0%
 ````

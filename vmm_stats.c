@@ -5,7 +5,7 @@
 #include "vmm_libvirt.h"
 
 vmmStats::vmmStats() {
-    fp = fopen("stats", "w");
+    fp = fopen(".stats", "w");
 }
 
 vmmStats::vmmStats(char *file) {

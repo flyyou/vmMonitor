@@ -131,9 +131,9 @@ void vmMonitor::process() {
     class vmmStatsRec start, curr, prev;
     unsigned long long cpuUtil;
 
-    system("sort stats > stats.tmp");
+    system("sort .stats > .stats.sorted");
 
-    fp = fopen("stats.tmp", "r");
+    fp = fopen(".stats.sorted", "r");
 
     if (fp) {
         int ret;
@@ -144,13 +144,12 @@ void vmMonitor::process() {
             while (fscanf(fp, "%s %d %llu %llu", curr.node, &curr.vmID, &curr.nodeCpuTime, &curr.vmCpuTime) > 0) {
                 if ((strcmp(prev.node, curr.node)) || (curr.vmID != prev.vmID)) {
                     cpuUtil = (100 * (prev.vmCpuTime - start.vmCpuTime)) / (prev.nodeCpuTime - start.nodeCpuTime);
-                    printf("\nserver=%s vm-id=%d cpu-util=%llu%%\n", start.node, start.vmID, cpuUtil);
+                    if (cpuUtil < cpuThreshold)
+                        printf("server: %-30s vmid: %-4d cpu_util: %llu%%\n", start.node, start.vmID, cpuUtil);
                     curr.copy(&start);
                 }
                 curr.copy(&prev);
             }
-            cpuUtil = (100 * (prev.vmCpuTime - start.vmCpuTime)) / (prev.nodeCpuTime - start.nodeCpuTime);
-            printf("\nserver=%s vm-id=%d cpu-util=%llu%%\n", start.node, start.vmID, cpuUtil);
         }
     }
 }
