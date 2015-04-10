@@ -1,5 +1,5 @@
 # vmMonitor
-vmMonitor monitors the private cloud for unused/underutilized VM's. It uses the CPU, memory  and disk usage (as viewed by the host machine) to determine resource utilization of VMs. The libvirt library is used to remotely connect to hosts to collect statistics.
+vmMonitor monitors the private cloud for unused/underutilized VM's. It uses the CPU, memory  and disk usage (as viewed by the host machine) to determine resource utilization of VMs. The libvirt library is used to remotely connect to hosts to collect statistics. The program prints to stdout all VMs which have resource utilizations less that the configured thresholds.
 
 ## Build
 -----
@@ -65,10 +65,18 @@ server: localhost                      vmid: 18   cpu_util: 0%
 ```
 
 ## Resources
+vmMonitor service
+```
+Attribute		Type		Required   Default	Description
+-------------------------------------------------------------------------------
+status                  String		Yes	   Stopped	Running or Stopped
+```
+
 Config (vmmConfig)
 ```
-Attribute	Type		Required   Default	Description
+Attribute		Type		Required   Default	Description
 -------------------------------------------------------------------------------
+tenantId
 runTime
 numThreads
 cpuThreshold
@@ -78,10 +86,10 @@ monitorInterval
 numIterations
 ```
 Network Topology (vmmTopo)
-nodeFile
 ```
 Attribute	Type		Required   Default	Description
 -------------------------------------------------------------------------------
+nodeFile
 ```
 Statistics Collector (vmmStats)
 ```
@@ -92,13 +100,22 @@ Statistics record (vmmStatsRec)
 ```
 Attribute	Type		Required   Default	Description
 -------------------------------------------------------------------------------
+timestamp	Integer					Timestamp of stats record
+node		String					Host IP address / hostname
+vmID		Integer					VM Id
+vmCpuUtil	Integer					Percent CPU utilization
 ```
 Libvirt Driver (vmmLibvirt)
 ```
 Attribute	Type		Required   Default	Description
 -------------------------------------------------------------------------------
+connectionType	String					qemu or tls
 ```
 
 ## API Operations
 Base URL:
 
+## ToDo
+- Multi-process/thread implementation. The present implementation is single threaded. 
+- Add memory and disk monitoring. The present implementation only supports CPU utlization monitoring.
+- Rest API interface to the application.
