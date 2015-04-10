@@ -18,7 +18,6 @@ public:
     int numIterationsOpt;
     int numIterations;
     int nodeFileOpt;
-    char nodeFile[256];
     vmmConfig();
 };
 #endif

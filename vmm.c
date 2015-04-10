@@ -15,6 +15,7 @@ int vmMonitor::init(int argc, char *argv[]) {
     extern char *optarg;
     extern int optind, optopt;
     int optchar;
+    char nodeFile[256];
 
     while( ( optchar = getopt( argc, argv, "c:d:m:n:p:t:x:lh" ) ) != -1 ) {
         switch( optchar ) {
@@ -56,7 +57,7 @@ int vmMonitor::init(int argc, char *argv[]) {
         goto usage;
 
         config.nodeFileOpt = 1;
-        strcpy(config.nodeFile, argv[optind]);
+        strcpy(nodeFile, argv[optind]);
 
     if (!config.numIterationsOpt) {
         if (config.runTimeOpt) {
@@ -66,7 +67,7 @@ int vmMonitor::init(int argc, char *argv[]) {
         }
     }
 
-    topo.init(config.nodeFile);
+    topo.init(nodeFile);
         
     return 1;
 

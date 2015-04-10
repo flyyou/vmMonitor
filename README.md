@@ -65,8 +65,40 @@ server: localhost                      vmid: 18   cpu_util: 0%
 ```
 
 ## Resources
-### Config (vmmConfig)
-### Network Topology (vmmTopo)
-### Statistics Collector (vmmStats)
-### Statistics record (vmmStatsRec)
-### Libvirt Driver (vmmLibvirt)
+Config (vmmConfig)
+```
+Attribute	Type		Required   Default	Description
+-------------------------------------------------------------------------------
+runTime
+numThreads
+cpuThreshold
+memThreshold
+diskThreshold
+monitorInterval
+numIterations
+```
+Network Topology (vmmTopo)
+nodeFile
+```
+Attribute	Type		Required   Default	Description
+-------------------------------------------------------------------------------
+```
+Statistics Collector (vmmStats)
+```
+Attribute	Type		Required   Default	Description
+-------------------------------------------------------------------------------
+```
+Statistics record (vmmStatsRec)
+```
+Attribute	Type		Required   Default	Description
+-------------------------------------------------------------------------------
+```
+Libvirt Driver (vmmLibvirt)
+```
+Attribute	Type		Required   Default	Description
+-------------------------------------------------------------------------------
+```
+
+## API Operations
+Base URL:
+
