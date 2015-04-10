@@ -9,18 +9,6 @@
 #include "vmm_stats.h"
 
 vmMonitor::vmMonitor() {
-    // Default config
-    runTimeOpt = 0;
-    numIterationsOpt = 0;
-    numThreadsOpt = 0;
-    monitorIntervalOpt = 0;
-    cpuThresholdOpt = 1;
-    diskThresholdOpt = 1;
-
-    monitorInterval = 10;
-    numIterations = 2;
-    cpuThreshold = 20;
-    diskThreshold = 20;
 }
 
 int vmMonitor::init(int argc, char *argv[]) {
@@ -31,32 +19,32 @@ int vmMonitor::init(int argc, char *argv[]) {
     while( ( optchar = getopt( argc, argv, "c:d:m:n:p:t:x:lh" ) ) != -1 ) {
         switch( optchar ) {
             case 't':
-                runTimeOpt = 1;
-                runTime = atoi(optarg) * 60;
+                config.runTimeOpt = 1;
+                config.runTime = atoi(optarg) * 60;
                 break;
             case 'x':
-                numThreadsOpt = 1;
-                numThreads = atoi(optarg);
+                config.numThreadsOpt = 1;
+                config.numThreads = atoi(optarg);
                 break;
             case 'c':
-                cpuThresholdOpt = 1;
-                cpuThreshold = atoi(optarg);
+                config.cpuThresholdOpt = 1;
+                config.cpuThreshold = atoi(optarg);
                 break;
             case 'm':
-                memThresholdOpt = 1;
-                memThreshold = atoi(optarg);
+                config.memThresholdOpt = 1;
+                config.memThreshold = atoi(optarg);
                 break;
             case 'd':
-                diskThresholdOpt = 1;
-                diskThreshold = atoi(optarg);
+                config.diskThresholdOpt = 1;
+                config.diskThreshold = atoi(optarg);
                 break;
             case 'i':
-                monitorIntervalOpt = 1;
-                monitorInterval = atoi(optarg);
+                config.monitorIntervalOpt = 1;
+                config.monitorInterval = atoi(optarg);
                 break;
             case 'n':
-                numIterationsOpt = 1;
-                numIterations = atoi(optarg);
+                config.numIterationsOpt = 1;
+                config.numIterations = atoi(optarg);
                 break;
             case 'h':
             default:
@@ -67,18 +55,18 @@ int vmMonitor::init(int argc, char *argv[]) {
     if (optind >= argc)
         goto usage;
 
-        nodeFileOpt = 1;
-        strcpy(nodeFile, argv[optind]);
+        config.nodeFileOpt = 1;
+        strcpy(config.nodeFile, argv[optind]);
 
-    if (!numIterationsOpt) {
-        if (runTimeOpt) {
-            numIterations = runTime / monitorInterval;
+    if (!config.numIterationsOpt) {
+        if (config.runTimeOpt) {
+            config.numIterations = config.runTime / config.monitorInterval;
         } else {
-            numIterationsOpt = 1;
+            config.numIterationsOpt = 1;
         }
     }
 
-    topo.init(nodeFile);
+    topo.init(config.nodeFile);
         
     return 1;
 
@@ -101,7 +89,7 @@ void vmMonitor::collect() {
     int i, j, k;
     class vmmStats stats;
 
-    for (i=0; i<numIterations; i++) {
+    for (i=0; i<config.numIterations; i++) {
         char *nodes[GET_NODES_BATCH_SIZE];
         int numNodes;
         FILE *fp1 = 0;
@@ -120,8 +108,8 @@ void vmMonitor::collect() {
                 topo.freeNodes(nodes, numNodes);
             } while (numNodes = topo.getNextNodes(nodes));
         }
-        if (i < numIterations-1)
-            sleep(monitorInterval);
+        if (i < config.numIterations-1)
+            sleep(config.monitorInterval);
     }
     return;
 }
@@ -144,7 +132,7 @@ void vmMonitor::process() {
             while (fscanf(fp, "%s %d %llu %llu", curr.node, &curr.vmID, &curr.nodeCpuTime, &curr.vmCpuTime) > 0) {
                 if ((strcmp(prev.node, curr.node)) || (curr.vmID != prev.vmID)) {
                     cpuUtil = (100 * (prev.vmCpuTime - start.vmCpuTime)) / (prev.nodeCpuTime - start.nodeCpuTime);
-                    if (cpuUtil < cpuThreshold)
+                    if (cpuUtil < config.cpuThreshold)
                         printf("server: %-30s vmid: %-4d cpu_util: %llu%%\n", start.node, start.vmID, cpuUtil);
                     curr.copy(&start);
                 }

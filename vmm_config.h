@@ -1,7 +1,5 @@
-#ifndef __VMM_H__
-#define __VMM_H__
-
-#include "vmm_topo.h"
+#ifndef __VMM_CONFIG_H__
+#define __VMM_CONFIG_H__
 
 class vmmConfig {
 public:
@@ -23,16 +21,4 @@ public:
     char nodeFile[256];
     vmmConfig();
 };
-
-class vmMonitor {
-    class vmmConfig config;
-    class vmmTopo topo;
-public:
-    vmMonitor();
-    int init(int argc, char *argv[]);
-    void collect();
-    void process();
-    void enforce();
-};
-
 #endif

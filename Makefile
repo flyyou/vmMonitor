@@ -11,7 +11,8 @@ OBJS = main.o \
        vmm.o \
        vmm_libvirt.o \
        vmm_topo.o \
-       vmm_stats.o
+       vmm_stats.o \
+       vmm_config.o
 
 default::
 	@echo "You must say what you want to build.  For example:"
