@@ -1,14 +1,14 @@
 # vmMonitor
-A C++ app to monitor VM utilization using libvirt
+vmMonitor monitors the private cloud for unused/underutilized VM's. It uses the CPU, memory  and disk usage (as viewed by the host machine) to determine resource utilization of VMs. The libvirt library is used to remotely connect to hosts to collect statistics.
 
-Build
+## Build
 -----
 ```
 make clean
 make all
 ```
 
-Usage
+## Usage
 -----
 ```
 vmmon -help
@@ -43,3 +43,30 @@ server: localhost                      vmid: 17   cpu_util: 0%
 server: localhost                      vmid: 18   cpu_util: 0%
 
 ````
+
+
+
+## Entity Relationship
+
+```
+                    +-----------+            +---------+
+                    | vmMonitor |------------| vmmTopo |
+                    +-----------+            +---------+
+                          |
+ +-----------+      +-----------+            +-------------+
+ | vmmConfig |----- | vmmStats  |------------| vmmStatsRec |
+ +-----------+      +-----------+            +-------------+
+                          |
+                    +------------+
+                    | vmmLibvirt |
+                    +------------+
+
+
+```
+
+## Resources
+### Config (vmmConfig)
+### Network Topology (vmmTopo)
+### Statistics Collector (vmmStats)
+### Statistics record (vmmStatsRec)
+### Libvirt Driver (vmmLibvirt)
