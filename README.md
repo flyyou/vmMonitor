@@ -17,10 +17,8 @@ make all
 
 ## Usage
 -----
-```
-
 vmMonitor uses tls to connect to remote hosts. The machine on which vmMonitor is running and the remote libvirtd hosts should be configured for remote TLS access. Please follow the procedure in https://libvirt.org/remote.html.
-
+```
 vmmon -help
 Usage: vmmon [options] [FILENAME]
        FILENAME
