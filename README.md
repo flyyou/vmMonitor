@@ -7,7 +7,7 @@ vmMonitor monitors the private cloud for unused/underutilized VM's. It uses the 
 
 Install libvirt and ssl libraries:
 ```
-sudo apt-get install ilibssl-dev libvirt-bin libvirt-dev 
+sudo apt-get install libssl-dev libvirt-bin libvirt-dev 
 ```
 Build:
 ```
