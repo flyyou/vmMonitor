@@ -63,6 +63,9 @@ server: localhost                      vmid: 18   cpu_util: 0%
 
 
 ```
+## Design
+
+VmMonitor implements a pull model, where a centrally running instance of the vmMonitor service pulls VM statistics from the cloud. Scalability-wise this is not the best solution - a push model scales better. In the push model, a light-weight agent would collect local node level statistcs and push to a central statistics collector/analyzer.
 
 ## Resources
 vmMonitor service
