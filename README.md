@@ -3,6 +3,13 @@ vmMonitor monitors the private cloud for unused/underutilized VM's. It uses the 
 
 ## Build
 -----
+### Ubuntu
+
+Install libvirt and ssl libraries:
+```
+sudo apt-get install ilibssl-dev libvirt-bin libvirt-dev 
+```
+Build:
 ```
 make clean
 make all
@@ -11,6 +18,9 @@ make all
 ## Usage
 -----
 ```
+
+vmMonitor uses tls to connect to remote hosts. The machine on which vmMonitor is running and the remote libvirtd hosts should be configured for remote TLS access. Please follow the procedure in https://libvirt.org/remote.html.
+
 vmmon -help
 Usage: vmmon [options] [FILENAME]
        FILENAME
