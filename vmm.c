@@ -5,8 +5,6 @@
 
 #include "vmm.h"
 #include "vmm_libvirt.h"
-#include "vmm_topo.h"
-#include "vmm_stats.h"
 
 vmMonitor::vmMonitor() {
 }
@@ -115,31 +113,46 @@ void vmMonitor::collect() {
     return;
 }
 
+void vmMonitor::checkCpuUtil(vmmStatsRec *rec, unsigned long long cpuUtil) {
+    //if (cpuUtil < config.cpuThreshold)
+        printf("server: %-30s vmid: %-4d cpu_util: %llu%%\n", rec->node, rec->vmID, cpuUtil);
+}
+ 
 void vmMonitor::process() {
     FILE *fp;
-    class vmmStatsRec start, curr, prev;
+    class vmmStatsRec curr, prev;
     unsigned long long cpuUtil;
+    unsigned long long vmCpuTime;
+    unsigned long long nodeCpuTime;
+    int n;
 
     system("sort .stats > .stats.sorted");
 
     fp = fopen(".stats.sorted", "r");
 
     if (fp) {
-        int ret;
+        n = 0;
+        prev.vmCpuTime = 0;
+        prev.nodeCpuTime = 0;
+        prev.vmID = 0;
+        cpuUtil = 0;
 
-        ret = fscanf(fp, "%s %d %llu %llu", start.node, &start.vmID, &start.nodeCpuTime, &start.vmCpuTime);
-        if(ret > 0) {
-            start.copy(&prev);
-            while (fscanf(fp, "%s %d %llu %llu", curr.node, &curr.vmID, &curr.nodeCpuTime, &curr.vmCpuTime) > 0) {
-                if ((strcmp(prev.node, curr.node)) || (curr.vmID != prev.vmID)) {
-                    cpuUtil = (100 * (prev.vmCpuTime - start.vmCpuTime)) / (prev.nodeCpuTime - start.nodeCpuTime);
-                    if (cpuUtil < config.cpuThreshold)
-                        printf("server: %-30s vmid: %-4d cpu_util: %llu%%\n", start.node, start.vmID, cpuUtil);
-                    curr.copy(&start);
-                }
+        while (fscanf(fp, "%s %d %llu %llu", curr.node, &curr.vmID, &curr.nodeCpuTime, &curr.vmCpuTime) > 0) {
+            if ((n == 0) || !(strcmp(prev.node, curr.node)) && (curr.vmID == prev.vmID)) {
+                vmCpuTime = curr.vmCpuTime - prev.vmCpuTime;
+                nodeCpuTime = curr.nodeCpuTime - prev.nodeCpuTime;
+                cpuUtil = (cpuUtil*n + (100 * (curr.vmCpuTime - prev.vmCpuTime)) / (curr.nodeCpuTime - prev.nodeCpuTime))/++n;
                 curr.copy(&prev);
+            } else {
+                checkCpuUtil(&prev, cpuUtil);
+        	prev.vmCpuTime = 0;
+        	prev.nodeCpuTime = 0;
+        	prev.vmID = 0;
+                n = 0;
             }
         }
+        if (n)
+            checkCpuUtil(&prev, cpuUtil);
     }
 }
 

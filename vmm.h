@@ -2,6 +2,7 @@
 #define __VMM_H__
 
 #include "vmm_topo.h"
+#include "vmm_stats.h"
 
 class vmmConfig {
 public:
@@ -27,6 +28,7 @@ public:
 class vmMonitor {
     class vmmConfig config;
     class vmmTopo topo;
+    void checkCpuUtil(vmmStatsRec *rec, unsigned long long cpuUtil);
 public:
     vmMonitor();
     int init(int argc, char *argv[]);
